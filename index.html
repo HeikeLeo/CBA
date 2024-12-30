@@ -26,21 +26,96 @@
     </head>
     <body>
         <table>
-            <h1>中国男子篮球(CBA)职业联赛赛程</h1>
-            <tr>
+            <h1 id="title">中国男子篮球(CBA)职业联赛赛程</h1>
+            <tr id="header">
                 <th>轮次</th>
                 <th>日期</th>
                 <th>时间</th>
                 <th>主队</th>
                 <th>客队</th>
             </tr>
-            <tr>
-                <td>第00轮</td>
-                <td>0000年00月00日</td>
-                <td>00：00</td>
-                <td>XX</td>
-                <td>XX</td>
+            <tr class="content">
+                <td>第24轮</td>
+                <td>2024年12月30日</td>
+                <td>19：35</td>
+                <td>宁波</td>
+                <td>广州</td>
+            </tr>
+            <tr class="content">
+                <td>第24轮</td>
+                <td>2024年12月30日</td>
+                <td>19：35</td>
+                <td>辽宁</td>
+                <td>广东</td>
+            </tr>
+            <tr class="content">
+                <td>第25轮</td>
+                <td>2024年12月31日</td>
+                <td>19：35</td>
+                <td>浙江（稠州）</td>
+                <td>深圳</td>
+            </tr>
+            <tr class="content">
+                <td>第25轮</td>
+                <td>2025年1月1日</td>
+                <td>19：35</td>
+                <td>广东</td>
+                <td>天津</td>
+            </tr>
+            <tr class="content">
+                <td>第25轮</td>
+                <td>2025年1月1日</td>
+                <td>19：35</td>
+                <td>浙江（方兴渡）</td>
+                <td>广州</td>
+            </tr>
+            <tr class="content">
+                <td>第26轮</td>
+                <td>2025年1月3日</td>
+                <td>19：35</td>
+                <td>福建</td>
+                <td>深圳</td>
+            </tr>
+            <tr class="content">
+                <td>第26轮</td>
+                <td>2025年1月3日</td>
+                <td>19：35</td>
+                <td>广州</td>
+                <td>江苏</td>
+            </tr>
+            <tr class="content">
+                <td>第26轮</td>
+                <td>2025年1月4日</td>
+                <td>19：35</td>
+                <td>广东</td>
+                <td>山东</td>
+            </tr>
+            <tr class="content">
+                <td>第27轮</td>
+                <td>2025年1月5日</td>
+                <td>19：35</td>
+                <td>广州</td>
+                <td>青岛</td>
+            </tr>
+            <tr class="content">
+                <td>第27轮</td>
+                <td>2025年1月6日</td>
+                <td>19：35</td>
+                <td>深圳</td>
+                <td>广东</td>
             </tr>
         </table>
     </body>
+	<script type="text/javascript">
+		var d=new Date()
+		var date=[d.getFullYear(),d.getMonth()+1,d.getDate()]
+        var content=document.getElementsByClassName('content')
+		for(var i=0;i<content.length;i++){
+			console.log(content[i].innerHTML.indexOf(date[0]),date[0],date[1],date[2])
+            if(content[i].innerHTML.indexOf(date[0])>-1&&content[i].innerHTML.indexOf(date[1])>-1&&content[i].innerHTML.indexOf(date[2])>-1){
+                content[i].style.backgroundColor='pink'
+                content[i].style.fontWeight='bolder'
+            }    
+		}
+	</script>
 </html>
