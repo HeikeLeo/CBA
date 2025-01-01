@@ -111,11 +111,12 @@
 		var date=[d.getFullYear(),d.getMonth()+1,d.getDate()]
         var content=document.getElementsByClassName('content')
 		for(var i=0;i<content.length;i++){
-			console.log(content[i].innerHTML.indexOf(date[0]),date[0],date[1],date[2])
-            if(content[i].innerHTML.indexOf(date[0])>-1&&content[i].innerHTML.indexOf(date[1])>-1&&content[i].innerHTML.indexOf(date[2])>-1){
+            var content_date=content[i].innerHTML.split('<td>')[2].split('</td>')[0]
+            var date_str=date[0]+'年'+date[1]+'月'+date[2]+'日'
+            if(content_date==date_str){
                 content[i].style.backgroundColor='pink'
                 content[i].style.fontWeight='bolder'
-            }    
+            }
 		}
 	</script>
 </html>
