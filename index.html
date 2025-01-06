@@ -67,7 +67,7 @@
 		
             <tr class="content">
                 <td>第27轮</td>
-                <td>2025年1月6日</td>
+                <td>2025年01月76日</td>
                 <td>19：35</td>
                 <td>深圳</td>
                 <td>广东</td>
@@ -146,6 +146,12 @@
 	<script type="text/javascript">
 		var d=new Date() //获取当前时间
 		var date=[d.getFullYear(),d.getMonth()+1,d.getDate()] //获取当前时间的年、月、日
+        if (date[1]<10){
+            date[1]='0'+date[1] //如果月小于10，在月前面加0
+        }
+        if (date[2]<10){
+            date[2]='0'+date[2] //如果日小于10，在日前面加0
+        }
         var content=document.getElementsByClassName('content') //获取所有的内容
 		for(var i=0;i<content.length;i++){ //遍历所有的内容
             var content_date=content[i].innerHTML.split('<td>')[2].split('</td>')[0] //获取当前内容的日期
