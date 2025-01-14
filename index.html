@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CBA赛程</title>
+        <style>
+            table {
+                width: 100%; /* 表格宽度为100% */
+                border-collapse: collapse; /* 合并边框 */
+            }
+            th, td {
+                border: 1px solid #ddd; /* 边框样式 */
+                padding: 8px 0px; /* 内边距 */
+                text-align: center; /* 左对齐 */
+                font-size: 90%; /* 字体大小 */
+            }
+            h1{
+                width: 100%; /* 表格宽度为100% */
+                text-align: center; /* 居中对齐 */
+                font-size: 130%; /* 字体大小 */
+            }
+            #header {
+                background-color: #f2f2f2; /* 表头背景色 */
+            }
+            .content:hover{
+                background-color: #fcf2e0; /* 鼠标悬停时的背景色 */
+            }
+            #cover{
+                width: 100vw; /* 宽度为100% */
+                height: 100vh; /* 高度为100% */
+                text-align: center; /* 居中对齐 */
+                position: fixed; /* 固定位置 */
+                top: 0; /* 距离顶部0 */
+                left: 0; /* 距离左侧0 */
+                background-color: darkgrey; /* 背景色 */
+                opacity: 0.95; /* 透明度 */
+                z-index: 10; /* 层级 */
+                display: none; /* 不显示 */
+                align-items: center; /* 垂直居中 */
+                justify-content: space-evenly; /* 水平居中 */
+            }
+            #cover div{
+                width: 80%; /* 宽度为80% */
+                height: 23%; /* 高度为23% */
+                background-color: gray; /* 背景色 */
+            }
+            #info{
+                width: 100%; /* 宽度为100% */
+                text-align: center; /* 居中对齐 */
+                font-size: 200%; /* 字体大小 */
+                position: relative; /* 相对定位 */
+                top: 20%; /* 距离顶部20% */
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <h1 id="title">中国男子篮球职业联赛(CBA)赛程</h1>
+            <tr id="header">
+                <th>轮次</th>
+                <th>日期</th>
+                <th>时间</th>
+                <th>主队</th>
+                <th>客队</th>
+            </tr>
+            <tr class='content'>
+                <td>常规赛第31轮</td>
+                <td>2025年01月15日</td>
+                <td>19:35</td>
+                <td>深圳马可波罗</td>
+                <td>南京头排苏酒</td>
+            </tr>
+            <tr class='content'>
+                <td>常规赛第31轮</td>
+                <td>2025年01月16日</td>
+                <td>19:35</td>
+                <td>广州朗肽海本</td>
+                <td>广东东阳光</td>
+            </tr>
+            <tr class='content'>
+                <td>常规赛第32轮</td>
+                <td>2025年01月17日</td>
+                <td>19:35</td>
+                <td>深圳马可波罗</td>
+                <td>九台农商银行</td>
+            </tr>
+            <tr class='content'>
+                <td>常规赛第32轮</td>
+                <td>2025年01月18日</td>
+                <td>19:35</td>
+                <td>福建晋江文旅</td>
+                <td>广东东阳光</td>
+            </tr>
+            <tr class='content'>
+                <td>常规赛第32轮</td>
+                <td>2025年01月18日</td>
+                <td>20:00</td>
+                <td>新疆伊力特</td>
+                <td>广州朗肽海本</td>
+            </tr>
+            <tr class='content'>
+                <td>常规赛第33轮</td>
+                <td>2025年01月19日</td>
+                <td>19:35</td>
+                <td>北京控股</td>
+                <td>深圳马可波罗</td>
+            </tr>
+            <tr class='content'>
+                <td>常规赛第33轮</td>
+                <td>2025年01月20日</td>
+                <td>19:35</td>
+                <td>山西汾酒</td>
+                <td>广州朗肽海本</td>
+            </tr>
+            <tr class='content'>
+                <td>常规赛第33轮</td>
+                <td>2025年01月20日</td>
+                <td>19:35</td>
+                <td>南京头排苏酒</td>
+                <td>广东东阳光</td>
+            </tr>            
+        </table>
+
+        <div id="cover" onclick="close_info()">
+            <div>
+                <h1 id="info">2025年1月6日</h1>
+            </div>
+        </div>
+    </body>
+	<script type="text/javascript">
+		var d=new Date() //获取当前时间
+		var date=[d.getFullYear(),d.getMonth()+1,d.getDate()] //获取当前时间的年、月、日
+        if (date[1]<10){
+            date[1]='0'+date[1] //如果月小于10，在月前面加0
+        }
+        if (date[2]<10){
+            date[2]='0'+date[2] //如果日小于10，在日前面加0
+        }
+        var content=document.getElementsByClassName('content') //获取所有的内容
+		for(var i=0;i<content.length;i++){ //遍历所有的内容
+            var content_date=content[i].innerHTML.split('<td>')[2].split('</td>')[0] //获取当前内容的日期
+            var date_str=date[0]+'年'+date[1]+'月'+date[2]+'日' //获取当前时间的字符串
+            if(content_date==date_str){ //如果当前内容的日期等于当前时间的字符串
+                content[i].style.backgroundColor='pink' //将当前内容的背景色改为粉色
+                content[i].style.fontWeight='bolder' //将当前内容的字体加粗
+            }
+		}
+
+        /*var td=document.getElementsByTagName('td') //获取所有的td
+        for(var i=0;i<td.length;i++){ //遍历所有的td
+            td[i].onclick=function(){ //点击td时
+                show_info(this.innerHTML) //显示遮罩层
+            }
+        }
+        function show_info(text){ //显示遮罩层
+            var cover=document.getElementById('cover') //获取遮罩层
+            var info=document.getElementById('info') //获取信息
+            info.innerHTML=text //设置信息
+            cover.style.display='flex' //显示遮罩层
+        }
+        function close_info(){ //关闭遮罩层
+            var cover=document.getElementById('cover') //获取遮罩层
+            cover.style.display='none' //隐藏遮罩层
+        }*/
+	</script>
+</html>
