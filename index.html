@@ -80,11 +80,20 @@
 
                     data.forEach(row => {
                         const tr = document.createElement('tr');
-						// console.log(row)
-                        if (row.日期 === today) {
-							tr.style.fontWeight='bolder'
-							tr.style.backgroundColor='pink'
-                        }
+						// console.log(row.日期.toString()<today.toString())
+						if(row.日期.toString()<today.toString()){
+							return
+						}
+						if (row.日期 === today) {
+							if(shouldHighlight(row.主队) || shouldHighlight(row.客队)){
+								tr.style.fontWeight='bolder'
+								tr.style.backgroundColor='gold'
+							}
+							else{
+								tr.style.fontWeight='bolder'
+								tr.style.backgroundColor='pink'
+							}
+						}
 						else if(shouldHighlight(row.主队) || shouldHighlight(row.客队)){
 							tr.style.fontWeight='bolder'
 							tr.style.backgroundColor='#e3fbfc'
