@@ -6,9 +6,9 @@
     <title>CBA赛程</title>
     <style>
         table {
-		        width: 100%; /* 表格宽度为100% */
-		        border-collapse: collapse; /* 合并边框 */
-		    }
+            width: 100%; /* 表格宽度为100% */
+            border-collapse: collapse; /* 合并边框 */
+        }
 		th, td {
 			border: 1px solid #ddd; /* 边框样式 */
 			padding: 8px 0px; /* 内边距 */
@@ -20,19 +20,30 @@
 			text-align: center; /* 居中对齐 */
 			font-size: 130%; /* 字体大小 */
 		}
-		#header {
+		.header {
 			background-color: #f2f2f2; /* 表头背景色 */
 		}
 		tbody tr:hover{
 			background-color: #fcf2e0; /* 鼠标悬停时的背景色 */
 		}
+        #p{
+            font-style: italic;
+            color: gray;
+            text-align: center;
+        }
+        #hide_button{
+            width: 100%;
+            text-align: center;
+            margin: 8px 0;
+            padding: 8px 0;
+        }
     </style>
 </head>
 <body>
 	<h1 id="title">中国男子篮球职业联赛(CBA)赛程</h1>
     <table id="scheduleTable">
         <thead>
-            <tr id="header">
+            <tr class="header">
                 <th>轮次</th>
                 <th>日期</th>
                 <th>时间</th>
@@ -44,6 +55,25 @@
             <!-- 表格内容将通过JavaScript动态生成 -->
         </tbody>
     </table>
+    <p id="p">没有更多的赛程了</p>
+
+    <button id="hide_button" onclick="TabTable()">点击显示往期赛程</button>
+
+    <table id="hide_table" style="display:none">
+        <thead>
+            <tr class="header">
+                <th>轮次</th>
+                <th>日期</th>
+                <th>时间</th>
+                <th>主队</th>
+                <th>客队</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 表格内容将通过JavaScript动态生成 -->
+        </tbody>
+    </table>
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script>
@@ -76,29 +106,12 @@
                 complete: function(results) {
                     const data = results.data;
                     const tableBody = document.querySelector('#scheduleTable tbody');
+                    const hide = document.querySelector('#hide_table tbody');
                     const today = getTodayDate();
 
                     data.forEach(row => {
                         const tr = document.createElement('tr');
 						// console.log(row.日期.toString()<today.toString())
-						if(row.日期.toString()<today.toString()){
-							return
-						}
-						if (row.日期 === today) {
-							if(shouldHighlight(row.主队) || shouldHighlight(row.客队)){
-								tr.style.fontWeight='bolder'
-								tr.style.backgroundColor='gold'
-							}
-							else{
-								tr.style.fontWeight='bolder'
-								tr.style.backgroundColor='pink'
-							}
-						}
-						else if(shouldHighlight(row.主队) || shouldHighlight(row.客队)){
-							tr.style.fontWeight='bolder'
-							tr.style.backgroundColor='#e3fbfc'
-						}
-						
                         tr.innerHTML = `
                             <td>${row.轮次}</td>
                             <td>${row.日期}</td>
@@ -106,6 +119,31 @@
                             <td>${row.主队}</td>
                             <td>${row.客队}</td>
                         `;
+						if(row.日期.toString()<today.toString()){
+                            if(shouldHighlight(row.主队) || shouldHighlight(row.客队)){
+                                tr.style.fontWeight='bolder'
+                                tr.style.backgroundColor='#e3fbfc'
+                            }
+							hide.appendChild(tr);
+                            return
+						}
+						if (row.日期 === today) {
+							if(shouldHighlight(row.主队) || shouldHighlight(row.客队)){
+								tr.style.fontWeight='bolder'
+								tr.style.backgroundColor='gold'
+                                // tr.className='gold'
+							}
+							else{
+								tr.style.fontWeight='bolder'
+								tr.style.backgroundColor='pink'
+                                // tr.className='pink'
+							}
+						}
+						else if(shouldHighlight(row.主队) || shouldHighlight(row.客队)){
+							tr.style.fontWeight='bolder'
+							tr.style.backgroundColor='#e3fbfc'
+						}
+						
                         tableBody.appendChild(tr);
                     });
                 }
@@ -114,6 +152,20 @@
 
         // 页面加载完成后执行
         window.onload = loadCSV;
+
+        // 显示往期赛程
+        var btn = document.querySelector('#hide_button')
+        function TabTable(a){
+            const hide = document.getElementById('hide_table');
+            if(btn.innerHTML == '点击显示往期赛程'){
+                hide.style.display='table'
+                btn.innerHTML = '点击隐藏往期赛程'
+            }
+            else{
+                hide.style.display='none'
+                btn.innerHTML = '点击显示往期赛程'
+            }
+        }
     </script>
 </body>
 </html>
