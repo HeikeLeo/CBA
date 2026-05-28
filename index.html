@@ -36,6 +36,7 @@
             text-align: center;
             margin: 8px 0;
             padding: 8px 0;
+            display: none;
         }
     </style>
 </head>
@@ -111,7 +112,6 @@
 
                     data.forEach(row => {
                         const tr = document.createElement('tr');
-						// console.log(row.日期.toString()<today.toString())
                         tr.innerHTML = `
                             <td>${row.轮次}</td>
                             <td>${row.日期}</td>
@@ -131,12 +131,10 @@
 							if(shouldHighlight(row.主队) || shouldHighlight(row.客队)){
 								tr.style.fontWeight='bolder'
 								tr.style.backgroundColor='gold'
-                                // tr.className='gold'
 							}
 							else{
 								tr.style.fontWeight='bolder'
 								tr.style.backgroundColor='pink'
-                                // tr.className='pink'
 							}
 						}
 						else if(shouldHighlight(row.主队) || shouldHighlight(row.客队)){
@@ -146,6 +144,12 @@
 						
                         tableBody.appendChild(tr);
                     });
+                    const tr_count = hide.children.length
+                    console.log(tr_count)
+                    
+                    if(tr_count > 1){
+                        document.querySelector('#hide_button').style.display='inline'
+                    }
                 }
             });
         }
@@ -154,7 +158,7 @@
         window.onload = loadCSV;
 
         // 显示往期赛程
-        var btn = document.querySelector('#hide_button')
+        const btn = document.querySelector('#hide_button')
         function TabTable(a){
             const hide = document.getElementById('hide_table');
             if(btn.innerHTML == '点击显示往期赛程'){
